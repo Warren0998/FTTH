@@ -64,24 +64,24 @@
       </a-scene>
 
       <script type="text/javascript">
-                 AFRAME.registerComponent('vidhandler', {
-         init: function () {
-          this.toggle = false;
-          document.querySelector("#vid").pause(); //reference to the video
-         },
-         tick:function(){  
-         if(document.querySelector("a-marker").object3D.visible == true){
-           if(!this.toggle){
-             this.toggle = true;
-             document.querySelector("#vid").play();
-           }
-         }else{
-           this.toggle = false;
-           document.querySelector("#vid").pause();
-         }
-         }
-         });
-
+                AFRAME.registerComponent('vidhandler', {
+  init: function () {
+    this.toggle = false;
+    this.vid = document.querySelector("#vid")
+    this.vid.pause()
+},
+tick:function(){
+   if(this.el.object3D.visible == true){
+     if(!this.toggle){
+       this.toggle = true;
+       this.vid.play();
+    }
+  }else{
+    this.toggle = false;
+    this.vid.pause();
+  }
+ }
+});
 
       </script>
       
