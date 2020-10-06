@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+<script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
+<body style='margin : 0px; overflow: scroll;'>
+ 
+<a-scene embedded arjs='sourceType: webcam;'>
+  <a-assets>
+    <video id="penguin-sledding" autoplay loop="true" src="penguin-sledding.mp4"></video>
+  </a-assets>
+
+  <!-- Using the asset management system. -->
+  <a-video src="#penguin-sledding" width="16" height="9" position="0 0 -20"></a-video>
+
+  <!-- Defining the URL inline. Not recommended but more comfortable for web developers. -->
+  <a-video src="airbending.mp4"></a-video>
+
+
+
+
+    <!-- handle marker with your own pattern -->
+    <a-marker type='pattern' url='path/to/pattern-marker.patt'>
+      <a-box position='0 0.5 0' material='color: red;'></a-box>
+    </a-marker>
+
+    <!-- handle marker with hiro preset -->
+    <a-marker preset='hiro'>
+      <a-box position='0 0.5 0' material='color: green;'></a-box>
+    </a-marker>
+
+    <!-- handle barcode marker -->
+    <a-marker type='barcode' value='5'>
+      <a-box position='0 0.5 0' material='color: blue;'></a-box>
+    </a-marker>
+
+    <!-- add a simple camera -->
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+</body>
+</html>
