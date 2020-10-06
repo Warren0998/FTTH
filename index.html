@@ -1,26 +1,88 @@
 <!DOCTYPE html>
-<html lang="en-US">
-<script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
-<script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-<body style='margin : 0px; overflow: hidden;'>
-  <a-scene embedded arjs='sourceType: webcam;'>
-    <!-- handle marker with your own pattern -->
+<html>
+   <head>
+      <title>Video AR</title>
+   </head>
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <!-- <script src="vendor/aframe/build/aframe.min.js"></script> -->
+   <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+   <!-- <script src="vendor/aframe/build/aframe.js"></script> -->
+   <!-- include for artoolkit trackingBackend -->
+   <script src='aframe_lib/artoolkit.min.js'></script>
+   <script src='aframe_lib/artoolkit.api.js'></script>
+   <!-- include for aruco trackingBackend -->
+   <script src='aframe_lib/svd.js'></script> 
+   <script src='aframe_lib/posit1.js'></script> 
+   <script src='aframe_lib/cv.js'></script> 
+   <script src='aframe_lib/aruco.js'></script> 
+   <script src='aframe_lib/threex-arucocontext.js'></script> 
+   <script src='aframe_lib/threex-arucodebug.js'></script>
+   <!-- include for tango trackingBackend -->
+   <script src='aframe_lib/THREE.WebAR.js'></script>
+   <!-- include ar.js -->
+   <script src='aframe_lib/signals.min.js'></script>
+   <script src='aframe_lib/threex-artoolkitprofile.js'></script>
+   <script src='aframe_lib/threex-artoolkitsource.js'></script>
+   <script src='aframe_lib/threex-artoolkitcontext.js'></script>
+   <script src='aframe_lib/threex-arbasecontrols.js'></script>
+   <script src='aframe_lib/threex-armarkercontrols.js'></script>
+   <script src='aframe_lib/threex-arsmoothedcontrols.js'></script>
+   <script src='aframe_lib/threex-hittesting-plane.js'></script>
+   <script src='aframe_lib/threex-hittesting-tango.js'></script>
+   <script src='aframe_lib/threex-armarkerhelper.js'></script>
+   <script src='aframe_lib/arjs-utils.js'></script>
+   <script src='aframe_lib/arjs-session.js'></script>
+   <script src='aframe_lib/arjs-anchor.js'></script>
+   <script src='aframe_lib/arjs-hittesting.js'></script>
+   <script src='aframe_lib/arjs-tangovideomesh.js'></script>
+   <script src='aframe_lib/arjs-tangopointcloud.js'></script>
+   <script src='aframe_lib/arjs-debugui.js'></script>
+   <script src='aframe_lib/threex-armultimarkerutils.js'></script>
+   <script src='aframe_lib/threex-armultimarkercontrols.js'></script>
+   <script src='aframe_lib/threex-armultimarkerlearning.js'></script>
+   <!-- include aframe-ar.js -->
+   <script src="aframe_lib/system-arjs.js"></script>
+   <script src="aframe_lib/component-anchor.js"></script>
+   <script src="aframe_lib/component-hit-testing.js"></script>
+   <body>
+      <a-scene embedded arjs='trackingMethod: best;'>
+
+         <a-anchor hit-testing-enabled='true'>
+
+          <a-assets>
+           <video id="vid" src="https://piis3dv01.s3-ap-southeast-1.amazonaws.com/firefly/firefly-dev/videos/Dispatcher%20Town%20Hall_Part%203.mp4" loop="true" crossorigin>
+          </a-assets>
+
     <a-marker type='pattern' url='path/to/pattern-b_cold_cont_main.patt'>
-      <a-box position='0 0.5 0' material='color: red;'></a-box>
+      <a-box position='0 0.2 0' material='color: red;'></a-box>
     </a-marker>
 
-    <!-- handle marker with hiro preset -->
-    <a-marker preset='hiro'>
-      <a-box position='0 0.5 0' material='color: green;'></a-box>
-    </a-marker>
+         </a-anchor>
 
-    <!-- handle barcode marker -->
-    <a-marker type='barcode' value='5'>
-      <a-box position='0 0.5 0' material='color: blue;'></a-box>
-    </a-marker>
+         <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
 
-    <!-- add a simple camera -->
-    <a-entity camera></a-entity>
-  </a-scene>
-</body>
-</html>
+      </a-scene>
+
+      <script type="text/javascript">
+                 AFRAME.registerComponent('vidhandler', {
+         init: function () {
+          this.toggle = false;
+          document.querySelector("#vid").pause(); //reference to the video
+         },
+         tick:function(){  
+         if(document.querySelector("a-marker").object3D.visible == true){
+           if(!this.toggle){
+             this.toggle = true;
+             document.querySelector("#vid").play();
+           }
+         }else{
+           this.toggle = false;
+           document.querySelector("#vid").pause();
+         }
+         }
+         });
+
+
+      </script>
+      
+   </body>
