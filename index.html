@@ -44,10 +44,9 @@ if(this.el.object3D.visible == true){
       <video id="vid" src="videos/Inside Wiring 111 Part 1 Of 2-1.mp4" loop="true" crossorigin>
     </a-assets>
    
-    <a-marker-camera id="memarker" preset='custom' type='pattern' url='path/pattern-b_cold_cont_main.patt' vidhandler>
-      <a-plane position='0 0 0' scale="1.5 1.5 1.5" width="2" rotation="-90 0 0" material='transparent:true;opacity: 0.9;src:#vid'>
-    </a-plane>
-    </a-marker-camera>
+    <a-marker crossorigin="anonymous" id="memarker" type="pattern" url="path/pattern-b_cold_cont_main.patt" vidhandler>
+      <a-plane position='0 0 0' scale="1.5 1.5 1.5" width="2" rotation="-90 0 0" material='transparent:true;opacity: 0.9;src:#vid'></a-plane>
+    </a-marker>
     <a-entity camera></entity>
   </a-scene>
 </body>
