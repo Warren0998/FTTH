@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
 
-<head>
-  <!-- AR.js by @jerome_etienne - github: https://github.com/jeromeetienne/ar.js - info: https://medium.com/arjs/augmented-reality-in-10-lines-of-html-4e193ea9fdbf -->
-  <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
-<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
-  <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.4/dist/aframe-extras.min.js"></script>
-
+ <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
   <script src="https://rawgit.com/mayognaise/aframe-gif-shader/master/dist/aframe-gif-shader.min.js"></script>
-  <script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.4/dist/aframe-extras.min.js"></script>
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+      <script>
 AFRAME.registerComponent('vidhandler', {
   // ...
   init: function () {
@@ -32,24 +39,23 @@ if(this.el.object3D.visible == true){
 });
   </script>
 
-</head>
 
+  </head>  
+  <body style='margin : 0px; overflow: hidden;'>
 
-<body style='margin : 0px; overflow: hidden;'>
-
-  <a-scene embedded artoolkit='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth: 240; canvasHeight: 180;' arjs="debugUIEnabled: false;" >
-
-
-    <a-assets>
+       <a-assets>
       <video id="vid" src="videos/Inside Wiring 111 Part 1 Of 2-1.mp4" loop="true" crossorigin>
     </a-assets>
-   
-    <a-marker id="memarker" preset="hiro" vidhandler>
-      <a-plane position='0 0 0' scale="1.5 1.5 1.5" width="2" rotation="-90 0 0" material='transparent:true;opacity: 0.9;src:#vid'></a-plane>
-    </a-marker>
-    <a-entity camera></entity>
+
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;' artoolkit='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth: 240; canvasHeight: 180;'>
+          <a-plane position='0 0 0' scale="1.5 1.5 1.5" width="2" rotation="-90 0 0" material='transparent:true;opacity: 0.9;src:#vid'></a-plane>
+    <a-marker-camera type="pattern" url="https://cdn.glitch.com/831683ab-ee14-45ff-a156-c93443366957%2Fpattern-ins_part1.patt?v=1602041866286" vidhandler></a-marker-camera>
   </a-scene>
-</body>
+    
 
-
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
 </html>
