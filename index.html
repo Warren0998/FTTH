@@ -31,7 +31,17 @@ if(this.el.object3D.visible == true){
   }
 });
   </script>
+ <script>
+if( _this.data.preset === 'hiro' ) {
 
+(...)
+
+} else if ( _this.data.type === 'pattern' ) {
+        arProfile.defaultMarkerParameters.type = 'pattern'
+        arProfile.defaultMarkerParameters.patternUrl = _this.data.patternUrl;
+        arProfile.defaultMarkerParameters.markersAreaEnabled = false
+}
+   </script>
 </head>
 
 
